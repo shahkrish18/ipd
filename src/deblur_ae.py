@@ -21,12 +21,12 @@ from sklearn.model_selection import train_test_split
 
 # constructing the argument parser
 parser = argparse.ArgumentParser()
-parser.add_argument('-e', '--epochs', type=int, default=50, 
+parser.add_argument('-e', '--epochs', type=int, default=5, 
             help='number of epochs to train the model for')
 args = vars(parser.parse_args())
 
 # helper functions
-image_dir = '../outputs/saved_images'
+image_dir = './outputs/saved_images'
 os.makedirs(image_dir, exist_ok=True)
     
 def save_decoded_image(img, name):
@@ -147,8 +147,8 @@ def validate(model, dataloader, epoch):
             running_loss += loss.item()
 
             if epoch == 0 and i == (len(val_data)/dataloader.batch_size)-1:
-                save_decoded_image(sharp_image.cpu().data, name=f"../outputs/saved_images/sharp{epoch}.jpg")
-                save_decoded_image(blur_image.cpu().data, name=f"../outputs/saved_images/blur{epoch}.jpg")
+                save_decoded_image(sharp_image.cpu().data, name=f"./outputs/saved_images/sharp{epoch}.jpg")
+                save_decoded_image(blur_image.cpu().data, name=f"./outputs/saved_images/blur{epoch}.jpg")
 
         val_loss = running_loss/len(dataloader.dataset)
         print(f"Val Loss: {val_loss:.5f}")
